@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+
+<script th:src="@{/js/shiro.js}" type="text/javascript" charset="UTF-8"></script>
+
+<h1 style="color:red;">首页</h1>
+<h1 class="now-time"></h1>
+
+<ul>
+    <!--admin角色的用户能同时拥有用户管理和订单管理的权限，user角色的用户只拥有订单管理的权限-->
+    <shiro:hasRole name="admin">
+        <li>
+            <a href="#">用户管理</a>
+        </li>
+    </shiro:hasRole>
+
+    <shiro:hasAnyRoles name="admin,user">
+        <li>
+            <a href="#">订单管理</a>
+            <ul>
+                <shiro:hasPermission name="order:add:*">
+                    <li><a href="#">新增</a></li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="order:del:*">
+                    <li><a href="#">删除</a></li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="order:upd:*">
+                    <li><a href="#">修改</a></li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="order:find:*">
+                    <li><a href="#">查询</a></li>
+                </shiro:hasPermission>
+
+            </ul>
+        </li>
+    </shiro:hasAnyRoles>
+
+
+</ul>
+
+<h1>
+    <a th:href="@{/logout}">退出登录</a>
+</h1>
+
+</body>
+
+</html>

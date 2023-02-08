@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: durid
+  web:
+    resources:
+      static-locations: classpath:/static/
+  mvc:
+    static-path-pattern: /**
+  #    view:
+#      prefix: /
+#      suffix: .html
+  thymeleaf:
+    # 检查模板是否存在，然后再呈现
+    check-template-location: true
+#    prefix: classpath:/templates/
+    encoding: UTF-8
+    cache: false
+    suffix: .html
+    servlet:
+      content-type: text/html
+    # 启用MVC Thymeleaf视图分辨率
+    enabled: true
+  redis:
+    host: 192.168.56.103
+    port: 6379
+    password: 123456
+    database: 0
+
+swagger:
+  # 是否开启swagger
+  enabled: true
+
+shiro:
+  login-url: /login
+  unauthorized-url: /unauth
+
+
